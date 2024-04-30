@@ -2,17 +2,17 @@ pipeline {
     agent any
    
     parameters {
-    choice choices: ['apply', 'destroy'], description: 'Select the Appropriate Action Please', name: 'action'
+    choice choices: ['apply', 'destroy'], description: 'Select a terraform action, please', name: 'action'
        }
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = "eu-west-2"
+        AWS_DEFAULT_REGION = "us-east-1"
     }
     stages {
         stage('Checkout') {
             steps {
-           git branch: 'main', url: 'https://github.com/ooghenekaro/nodejs-webapp.git'
+                git branch: 'main', url: 'https://github.com/MorelSami/netflix-app.git'
   
             }
         }
