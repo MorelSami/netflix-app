@@ -3,36 +3,36 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing app dependencies...
-      - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl   
-      - chmod +x ./kubectl
-      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-      - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
-      - source ~/.bashrc
-      - echo 'Check kubectl version'
-      - kubectl version --short --client
-    
+    - echo Installing app dependencies...
+    - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
+    - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+    - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+    - source ~/.bashrc
+    - echo 'Check kubectl version'
+    - kubectl version --short --client
+
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 335871625378.dkr.ecr.eu-west-2.amazonaws.com
-      - IMAGE_REPO_NAME=335871625378.dkr.ecr.eu-west-2.amazonaws.com/netflix-app
-      - IMAGE_TAG=latest
-      - aws eks --region eu-west-2 update-kubeconfig --name k8s-boy
+    - echo Logging in to Amazon ECR...
+    - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 720826398753.dkr.ecr.us-east-1.amazonaws.com
+    - IMAGE_REPO_NAME=720826398753.dkr.ecr.us-east-1.amazonaws.com/netflix-app-ecr
+    - IMAGE_TAG=v1.0
+    - aws eks --region us-east-1 update-kubeconfig --name netflix-eks-cluster
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG 335871625378.dkr.ecr.eu-west-2.amazonaws.com:$IMAGE_TAG
- 
+    - echo Build started on `date`
+    - echo Building the Docker image...
+    - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+    - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG 720826398753.dkr.ecr.us-east-1.amazonaws.com/netflix-app-ecr:$IMAGE_TAG
 
-      
+
+
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
-      - echo Push the latest image to cluster
-      - kubectl apply -f deployment.yml
+    - echo Build completed on `date`
+    - echo Pushing the Docker image...
+    - docker push $IMAGE_REPO_NAME:$IMAGE_TAG
+    - echo Push the latest image to cluster
+    - kubectl apply -f deployment.yml
 

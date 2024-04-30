@@ -2,43 +2,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: amazon-deployment
+  name: netflix-deployment
   namespace: default
   labels:
-    app: amazon-app
+    app: netflix-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: amazon-app
+      app: netflix-app
       tier: frontend
       version: 1.0.0
-#pod tempalte
+      #pod tempalte
   template:
     metadata:
       labels:
-        app: amazon-app
+        app: netflix-app
         tier: frontend
         version: 1.0.0
     spec: # Pod spec
       containers:
-      - name: amazon-container
-        image: ooghenekaro/amazon:latest
+      - name: netflix-container
+        image: 720826398753.dkr.ecr.us-east-1.amazonaws.com/netflix-app-ecr:v1.0
         ports:
         - containerPort: 3000
-        
-        
+
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: amazon-service
+  name: netflix-app-service
   labels:
-    app: amazon-app
+    app: netflix-app
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 3000
   selector:
-    app: amazon-app
+    app: netflix-app
