@@ -1,16 +1,16 @@
 # Define the provider for AWS
 provider "aws" {
-  region = "eu-west-2"  
+  region = "us-east-1"  
 }
 
 # Create an ECS cluster
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "karo-ecs-cluster"  
+  name = "netflix-ecs-cluster"  
 }
 
 # Create a task definition
 resource "aws_ecs_task_definition" "my_task_definition" {
-  family                = "my-task-family-test"
+  family                = "netflix-task-test"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 1024
@@ -19,8 +19,8 @@ resource "aws_ecs_task_definition" "my_task_definition" {
   container_definitions = <<EOF
 [
   {
-    "name": "my-container",
-    "image": "335871625378.dkr.ecr.eu-west-2.amazonaws.com/netflix-app:latest",  
+    "name": "netflix-container",
+    "image": "720826398753.dkr.ecr.us-east-1.amazonaws.com/netflix-app-ecr:v1.0",  
     "portMappings": [
       {
         "containerPort": 80,
@@ -34,14 +34,14 @@ EOF
 
 # Create a service to run the task on the cluster
 resource "aws_ecs_service" "my_service" {
-  name            = "my-service"
+  name            = "netflix-service"
   cluster         = aws_ecs_cluster.my_cluster.id
   task_definition = aws_ecs_task_definition.my_task_definition.arn
   desired_count   = 1
   launch_type     = "FARGATE"
   network_configuration {
-    subnets          = ["subnet-0e8b3d7199bf251a4"]  
-    security_groups  = ["sg-0dab44e5556cb4879"]      
+    subnets          = ["subnet-08c54a97347812875"]  
+    security_groups  = ["sg-0b702e58ad3103075"]      
     assign_public_ip = true
   }
 }
