@@ -22,7 +22,10 @@
 
 <section>
    <pre>
-      FYI: Netflix application (clone) can also be deployed via Kubernetes using the helm commands below:
-      
+      <b>FYI</b>: Netflix application (clone) can also be deployed via Kubernetes using the helm commands below:
+
+      - helm repo add netflix-clone-ms https://morelsami.github.io/netflix-app/
+      - helm repo update netflix-clone-ms
+      - helm install my-netflix-clone-helm netflix-clone-ms/netflix-clone-helm --version 0.1.0
    </pre>
 </section>

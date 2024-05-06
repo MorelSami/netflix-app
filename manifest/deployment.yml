@@ -25,7 +25,7 @@ spec:
       - name: netflix-container
         image: 720826398753.dkr.ecr.us-east-1.amazonaws.com/netflix-app-ecr:v1.0
         ports:
-        - containerPort: 3000
+        - containerPort: 80
 
 
 ---
@@ -39,6 +39,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 3000
+    targetPort: 80
   selector:
     app: netflix-app
