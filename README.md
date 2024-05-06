@@ -19,3 +19,10 @@
       <li>AWS (ECR, ECS, IAM)</li>
     <ul> 
 </section>
+
+<section>
+   <pre>
+      FYI: Netflix application (clone) can also be deployed via Kubernetes using the helm commands below:
+      
+   </pre>
+</section>
