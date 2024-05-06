@@ -3,7 +3,17 @@ entries:
   netflix-clone-helm:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2024-05-06T01:44:12.672503691-04:00"
+    created: "2024-05-06T08:31:21.487523238-04:00"
+    description: A Helm chart for K8s Netflix app (clone)
+    digest: 0cd54eef8489a07d9c4bb24e61664ac3fde511eba53d9ddc77bba7cc56f158d8
+    name: netflix-clone-helm
+    type: application
+    urls:
+    - netflix-clone-helm-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2024-05-06T08:31:21.481712577-04:00"
     description: A Helm chart for K8s Netflix app (clone)
     digest: 076160fdc78313e15cae005ec98290e2dc4c86cbf94c9b14c64f9440961a628c
     name: netflix-clone-helm
@@ -11,4 +21,4 @@ entries:
     urls:
     - netflix-clone-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2024-05-06T01:44:12.672219481-04:00"
+generated: "2024-05-06T08:31:21.481362141-04:00"
