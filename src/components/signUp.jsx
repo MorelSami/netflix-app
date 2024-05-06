@@ -25,6 +25,7 @@ function SignUp(props) {
   }
   return (
     <div>
+      <div className="login-box">Beta version</div>
       <div className="login-box">Unlimited movies, TV shows and more.</div>
       <div className="login-box-2">Watch anywhere. Cancel anytime.</div>
       <div className="login-box-3">

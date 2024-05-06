@@ -1,0 +1,28 @@
+#k8s deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}-deployment
+  namespace: {{ .Values.ns }}
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+      tier: frontend
+      version: {{ .Values.image.tag }}
+      #pod tempalte
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+        tier: frontend
+        version: {{ .Values.image.tag }}
+    spec: # Pod spec
+      containers:
+      - name: {{ .Values.appName }}-container
+        image: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
