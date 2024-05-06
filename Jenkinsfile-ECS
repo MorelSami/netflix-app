@@ -5,8 +5,8 @@ pipeline {
     choice choices: ['apply', 'destroy'], description: 'Select a terraform action, please', name: 'action'
        }
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY_ID = credentials('aws-key-user')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-key-pass')
         AWS_DEFAULT_REGION = "us-east-1"
     }
     stages {
